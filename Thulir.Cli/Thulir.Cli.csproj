@@ -8,4 +8,9 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Thulir.Core\Thulir.Core.csproj" />
+      <ProjectReference Include="..\Thulir.Landsat\Thulir.Landsat.csproj" />
+    </ItemGroup>
+
 </Project>

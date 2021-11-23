@@ -1,3 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Thulir.Cli.Commands;
 
-Console.WriteLine("Hello, World!");
+
+var landsatCommands = new LandsatCommands();
+await landsatCommands.BuildLandsatDataCatalog();
