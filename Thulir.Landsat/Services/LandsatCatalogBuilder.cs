@@ -25,15 +25,6 @@ namespace Thulir.Landsat.Services
             _awsDataInterface = new AwsDataInterface();
         }
         
-        public async Task<string> BuildCatalog(string key)
-        {
-            Console.WriteLine("Building the catalog for key:" + key);
-
-            
-
-            return "";
-        }
-        
         public async Task<LandsatCatalog> BuildCatalog(List<string> instruments, List<string> years, List<string>  paths, List<string>  rows)
         {
             _levelMaps.Add(0, new List<string>()

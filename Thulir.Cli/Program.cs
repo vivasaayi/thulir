@@ -2,4 +2,5 @@
 
 
 var landsatCommands = new LandsatCommands();
-await landsatCommands.BuildLandsatDataCatalog();
+// await landsatCommands.BuildLandsatDataCatalog();
+await landsatCommands.CopyLandDataSets();

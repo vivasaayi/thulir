@@ -6,10 +6,12 @@ namespace Thulir.Cli.Commands
     public class LandsatCommands
     {
         private ILandsatCatalogBuilder _landsatCatalogBuilder;
+        private ILandsatDataCopier _landsatDataCopier;
         
         public LandsatCommands()
         {
             _landsatCatalogBuilder = new LandsatCatalogBuilder();
+            _landsatDataCopier = new LandsatDataCopier();
         }
 
         public async Task BuildLandsatDataCatalog()
@@ -24,9 +26,16 @@ namespace Thulir.Cli.Commands
             );
         }
         
-        public void CopyLandSatFile()
+        public async Task CopyLandDataSets()
         {
+            var fileName = "/Users/rajanp/dataproducts.json";
             
+            List<string> filters = new List<string>()
+            {
+                "coastal", "blue", "green", "red", "nir08", "swir16", "swir22"
+            };
+
+            await _landsatDataCopier.CopyDataSets(fileName, filters);
         }
     }
 }
