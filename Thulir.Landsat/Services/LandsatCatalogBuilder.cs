@@ -14,7 +14,6 @@ namespace Thulir.Landsat.Services
         private IAwsDataInterface _awsDataInterface;
         
         string level2KeyName = "collection02/level-2/catalog.json";
-        private int _currentLevel = 0;
         
         private Dictionary<int, List<string>> _levelMaps = new Dictionary<int, List<string>>();
 
@@ -37,7 +36,7 @@ namespace Thulir.Landsat.Services
             _levelMaps.Add(3, paths);
             _levelMaps.Add(4, rows);
 
-            await GetCatalog(level2KeyName);
+            await GetCatalog(0, level2KeyName);
 
             string jsonString = JsonSerializer.Serialize(_allItems);
             
@@ -50,17 +49,17 @@ namespace Thulir.Landsat.Services
             return null;
         }
 
-        public async Task<LandsatCatalog> GetCatalog(string key)
+        public async Task<LandsatCatalog> GetCatalog(int currentLevel, string key)
         {
             var catalog = await _awsDataInterface.ListC2L2DataCatalog(key);
 
-            if (_currentLevel == _levelMaps.Count())
+            if (currentLevel == _levelMaps.Count())
             {
                 _allItems.AddRange(catalog.Links);
                 return catalog;
             }
 
-            var currentLevelMap = _levelMaps[_currentLevel++];
+            var currentLevelMap = _levelMaps[currentLevel];
 
             var s3KeyName = "";
             
@@ -73,13 +72,13 @@ namespace Thulir.Landsat.Services
                     if (currentLevelMap.Exists(s => s == link.Title))
                     {
                         s3KeyName = link.Href.Replace("https://landsatlook.usgs.gov/data/", "");
-                        return await GetCatalog(s3KeyName);
+                        await GetCatalog(currentLevel+1, s3KeyName);
                     } 
                 }
                 else
                 {
                     s3KeyName = link.Href.Replace("https://landsatlook.usgs.gov/data/", "");
-                    return await  GetCatalog(s3KeyName);
+                    await  GetCatalog(currentLevel+1, s3KeyName);
                 }
             }
 

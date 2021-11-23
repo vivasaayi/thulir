@@ -36,7 +36,7 @@ namespace Thulir.Landsat.Services
             _srBandNameToFileMap.Add("blue", "SR_B2.TIF");
             _srBandNameToFileMap.Add("green", "SR_B3.TIF");
             _srBandNameToFileMap.Add("red", "SR_B4.TIF");
-            _srBandNameToFileMap.Add("nir08", "T1_SR_B5.TIF");
+            _srBandNameToFileMap.Add("nir08", "SR_B5.TIF");
             _srBandNameToFileMap.Add("swir16", "SR_B6.TIF");
             _srBandNameToFileMap.Add("swir22", "SR_B7.TIF");
             _srBandNameToFileMap.Add("qa_aerosol", "QA_AEROSOL.TIF");
@@ -48,7 +48,7 @@ namespace Thulir.Landsat.Services
             
             foreach (var key in _stBandNameToFileMap.Keys)
             {
-                fileNames.Add(key, fileName + "_" + _stBandNameToFileMap[key]);    
+                fileNames.Add(key, fileName + _stBandNameToFileMap[key]);    
             }
 
             return fileNames;
@@ -69,6 +69,33 @@ namespace Thulir.Landsat.Services
 
         public async Task CopyDataSets(string fileName, List<string> filters)
         {
+            var files = GetFileNamesToCopy(fileName, filters);
+            
+            GenerateAWSCopyCommands(files);   
+        }
+
+        private void GenerateAWSCopyCommands(List<string> filesTobeCopied)
+        {
+            var prefix = "aws s3 cp s3://usgs-landsat/";
+            var sufix = " s3://landsat-dataasets --request-payer requester";
+
+            var allCommands = "";
+            
+            foreach (var file in filesTobeCopied)
+            {
+                var command = prefix + file + sufix + "\n";
+                allCommands += command;
+            }
+            
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "s3_copy_commands.sh")))
+            {
+                outputFile.WriteLine(allCommands);
+            }
+        }
+
+        public List<string> GetFileNamesToCopy(string fileName, List<string> filters)
+        {
             Console.WriteLine("Copying DataSets.." + fileName);
             LandsatCatalogItem[] links;
                 
@@ -84,6 +111,8 @@ namespace Thulir.Landsat.Services
                 if (link.Rel != "item") continue;
 
                 var bandFileName = link.Href.Replace("https://landsatlook.usgs.gov/data/", "");
+                
+                if(bandFileName.Contains("SR_stac.json")) continue;
                 
                 bandFileName = bandFileName.Replace("ST_stac.json", "").Replace("SR_stac.json", "");
                 
@@ -102,7 +131,7 @@ namespace Thulir.Landsat.Services
                     allFiles.Add(item.Key, item.Value);
                 }
                 
-                if (filters.Any())
+                if (!filters.Any())
                 {
                     filesToBeCopied.AddRange(allFiles.Values);
                 }
@@ -115,10 +144,7 @@ namespace Thulir.Landsat.Services
                 }
             }
 
-            foreach (var file in filesToBeCopied)
-            {
-                Console.WriteLine(file);
-            }
+            return filesToBeCopied;
         }
     }
 }
