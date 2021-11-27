@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.Aws", "Thulir.Aws\Th
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.Landsat", "Thulir.Landsat\Thulir.Landsat.csproj", "{76254462-5C96-4644-A64A-BC75CD5C6D5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.Gdal", "Thulir.Gdal\Thulir.Gdal.csproj", "{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{76254462-5C96-4644-A64A-BC75CD5C6D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76254462-5C96-4644-A64A-BC75CD5C6D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76254462-5C96-4644-A64A-BC75CD5C6D5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
