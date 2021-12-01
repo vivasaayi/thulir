@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Thulir.Landsat.Models;
 using Thulir.Landsat.Services;
 
 namespace Thulir.ReactUI.Controllers
@@ -13,10 +14,10 @@ namespace Thulir.ReactUI.Controllers
         string _level2KeyName = "collection02/level-2/catalog.json";
 
         [HttpGet("catalog")]
-        public async Task<string> catalog()
+        public async Task<LandsatCatalog> catalog()
         {
             var catalog = await _landsatDataSource.ListCatalog(_level2KeyName);
-            return JsonSerializer.Serialize(catalog);
+            return catalog;
         }
         
         [HttpGet("welcome2")]
