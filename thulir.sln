@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.Landsat", "Thulir.La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.Gdal", "Thulir.Gdal\Thulir.Gdal.csproj", "{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.Web", "Thulir.Web\Thulir.Web.csproj", "{6A55F795-4BBE-4987-901C-9EDFABB353B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{580F213A-9D5F-4A3E-A42F-D70B0C2B93BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A55F795-4BBE-4987-901C-9EDFABB353B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A55F795-4BBE-4987-901C-9EDFABB353B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A55F795-4BBE-4987-901C-9EDFABB353B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A55F795-4BBE-4987-901C-9EDFABB353B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

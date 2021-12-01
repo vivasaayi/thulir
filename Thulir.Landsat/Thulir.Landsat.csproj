@@ -8,6 +8,5 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Thulir.Aws\Thulir.Aws.csproj" />
-      <ProjectReference Include="..\Thulir.Gdal\Thulir.Gdal.csproj" />
     </ItemGroup>
 </Project>
