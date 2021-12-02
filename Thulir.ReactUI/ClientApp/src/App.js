@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import {LandsatDataSetBrowser} from './components/LandsatDataSetBrowser';
 
@@ -16,7 +15,6 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
         <Route path='/browse-landsat-data' component={LandsatDataSetBrowser} />
       </Layout>
     );

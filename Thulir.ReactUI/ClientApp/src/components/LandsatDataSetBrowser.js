@@ -5,14 +5,27 @@ export class LandsatDataSetBrowser extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {catalog: undefined, loading: true};
+        this.state = {
+            catalog: undefined, 
+            loading: true,
+            catalogName: ""
+        };
+        
+        this.exploreCatalog = this.exploreCatalog.bind(this);
     }
 
     componentDidMount() {
         this.fetchCatalog();
     }
+    
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        debugger;
+        if(this.state.catalogName !== prevState.catalogName) {
+            this.fetchCatalog();    
+        }
+    }
 
-    static renderCatalog(catalog) {
+    renderCatalog(catalog) {
         return (
             <div>
                 <h3>catalog.stac_version</h3>
@@ -22,6 +35,7 @@ export class LandsatDataSetBrowser extends Component {
                         <th>Link Type</th>
                         <th>Title</th>
                         <th>Link</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,6 +44,7 @@ export class LandsatDataSetBrowser extends Component {
                             <td>{link.rel}</td>
                             <td>{link.title}</td>
                             <td>{link.href}</td>
+                            <td><span onClick={() => this.exploreCatalog(link)}>Explore</span></td>
                         </tr>
                     )}
                     </tbody>
@@ -38,10 +53,18 @@ export class LandsatDataSetBrowser extends Component {
         );
     }
 
+    exploreCatalog(event) {
+        console.log(event)
+        
+        if(event.href.endsWith("catalog.json")) {
+            this.setState({catalogName: event.href});    
+        }
+    }
+
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : LandsatDataSetBrowser.renderCatalog(this.state.catalog);
+            : this.renderCatalog(this.state.catalog);
 
         return (
             <div>
@@ -52,8 +75,15 @@ export class LandsatDataSetBrowser extends Component {
     }
 
     async fetchCatalog() {
-        const response = await fetch('/api/landsatawsdataset/catalog');
-        const data = await response.json();
-        this.setState({catalog: data, loading: false});
+        try {
+            // ToDo: This logic is also present in the server
+            const s3KeyName = this.state.catalogName.replace("https://landsatlook.usgs.gov/data/", "");
+            console.log("Fetching data..", s3KeyName)
+            const response = await fetch('/api/landsatawsdataset/catalog?name=' + s3KeyName);
+            const data = await response.json();
+            this.setState({catalog: data, loading: false});    
+        } catch(ex) {
+            console.log(ex)
+        }
     }
 }

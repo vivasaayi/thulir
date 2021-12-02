@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,13 @@ namespace Thulir.ReactUI.Controllers
         string _level2KeyName = "collection02/level-2/catalog.json";
 
         [HttpGet("catalog")]
-        public async Task<LandsatCatalog> catalog()
+        public async Task<LandsatCatalog> catalog(string? name)
         {
-            var catalog = await _landsatDataSource.ListCatalog(_level2KeyName);
+            if (String.IsNullOrEmpty(name))
+            {
+                name = _level2KeyName;
+            }
+            var catalog = await _landsatDataSource.ListCatalog(name);
             return catalog;
         }
         
