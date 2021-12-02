@@ -19,7 +19,7 @@ export class LandsatDataSetBrowser extends Component {
     }
     
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger;
+        //debugger;
         if(this.state.catalogName !== prevState.catalogName) {
             this.fetchCatalog();    
         }
@@ -28,7 +28,9 @@ export class LandsatDataSetBrowser extends Component {
     renderCatalog(catalog) {
         return (
             <div>
-                <h3>catalog.stac_version</h3>
+                <h3>Stac Version: {catalog.stac_version}</h3>
+                <h3>Id: {catalog.id}</h3>
+                <h3>Description: {catalog.description}</h3>
                 <table className='table table-striped' aria-labelledby="tabelLabel">
                     <thead>
                     <tr>
@@ -58,6 +60,8 @@ export class LandsatDataSetBrowser extends Component {
         
         if(event.href.endsWith("catalog.json")) {
             this.setState({catalogName: event.href});    
+        } else if(event.href.endsWith("stac.json")) {
+            this.setState({catalogName: event.href});
         }
     }
 
