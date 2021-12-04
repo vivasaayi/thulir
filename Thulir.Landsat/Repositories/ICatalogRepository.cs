@@ -6,6 +6,6 @@ namespace Thulir.Landsat.Repositories
     public interface ICatalogRepository
     {
         public Task SaveCatalog(LandsatCatalog catalog);
-        public void GetCatalog();
+        public Task<LandsatCatalog> GetCatalog(string keyName);
     }
 }

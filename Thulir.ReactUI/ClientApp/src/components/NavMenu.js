@@ -34,10 +34,13 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/browse-landsat-data">Browse Landsat Data</NavLink>
+                </NavItem>
+                <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/catalog-builder">Catalog Builder</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/browse-landsat-data">Browse Landsat Data</NavLink>
+                  <NavLink tag={Link} className="text-dark" to="/localize-s3-data">Localize S3 Data</NavLink>
                 </NavItem>
               </ul>
             </Collapse>

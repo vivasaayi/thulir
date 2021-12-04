@@ -25,6 +25,11 @@ namespace Thulir.Landsat.Services
             _awsDataInterface = new AwsDataInterface();
             _catalogRepository = new CatalogRepository();
         }
+
+        public async Task<LandsatCatalog> GetIndexedCatalog()
+        {
+            return await _catalogRepository.GetCatalog("dataproducts");
+        }
         
         public async Task<LandsatCatalog> BuildCatalog(List<string> instruments, List<string> years, List<string>  paths, List<string>  rows)
         {

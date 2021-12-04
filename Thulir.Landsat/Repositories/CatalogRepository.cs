@@ -26,9 +26,11 @@ namespace Thulir.Landsat.Repositories
             await _s3Client.SaveFileContent(_bucketName, catalog.Description, RequestPayer.Requester, "application/json", data);
         }
 
-        public void GetCatalog()
+        public async Task<LandsatCatalog> GetCatalog(string keyName)
         {
-            throw new System.NotImplementedException();
+            var content =  await _s3Client.GetFileContent(_bucketName, keyName, RequestPayer.Requester);
+
+            return JsonSerializer.Deserialize<LandsatCatalog>(content);
         }
     }
 }

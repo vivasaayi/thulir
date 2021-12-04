@@ -32,10 +32,12 @@ namespace Thulir.ReactUI.Controllers
             return catalog;
         }
 
-        [HttpGet("welcome2")]
-        public string Welcome2()
+        [HttpGet("indexed-catalog")]
+        public async Task<LandsatCatalog> indexedCatalog()
         {
-            return "This is the Welcome2 action method...";
+            var catalog = await _landsatCatalogBuilder.GetIndexedCatalog();
+            
+            return catalog;
         }
     }
 }
