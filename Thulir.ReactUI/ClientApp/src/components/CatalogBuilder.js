@@ -95,7 +95,7 @@ export class CatalogBuilder extends Component {
     }
 
     renderControls() {
-        // TODO: Generate years it programmetically
+        // TODO: Generate years it programmatically
         return <div>
             <CForm>
                 <CContainer>
