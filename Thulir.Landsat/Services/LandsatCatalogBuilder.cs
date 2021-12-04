@@ -12,6 +12,7 @@ namespace Thulir.Landsat.Services
     public class LandsatCatalogBuilder : ILandsatCatalogBuilder
     {
         private IAwsDataInterface _awsDataInterface;
+        private ICatalogRepository _catalogRepository;
         
         string level2KeyName = "collection02/level-2/catalog.json";
         
@@ -22,6 +23,7 @@ namespace Thulir.Landsat.Services
         public LandsatCatalogBuilder()
         {
             _awsDataInterface = new AwsDataInterface();
+            _catalogRepository = new CatalogRepository();
         }
         
         public async Task<LandsatCatalog> BuildCatalog(List<string> instruments, List<string> years, List<string>  paths, List<string>  rows)
@@ -38,18 +40,15 @@ namespace Thulir.Landsat.Services
 
             await GetCatalog(0, level2KeyName);
 
-            string jsonString = JsonSerializer.Serialize(_allItems);
-            
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "dataproducts.json")))
+            var catalog =  new LandsatCatalog()
             {
-                outputFile.WriteLine(jsonString);
-            }
-            
-            return new LandsatCatalog()
-            {
+                Description = "dataproducts",
                 Links = _allItems.ToArray()
             };
+
+            await _catalogRepository.SaveCatalog(catalog);
+
+            return catalog;
         }
 
         public async Task<LandsatCatalog> GetCatalog(int currentLevel, string key)

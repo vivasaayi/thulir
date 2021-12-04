@@ -15,7 +15,8 @@ namespace Thulir.Aws
         {
             client = new AmazonS3Client(bucketRegion);
         }
-        public async Task<string>  GetFileContent(string bucketName, string keyName, RequestPayer requestPayer)
+
+        public async Task<string> GetFileContent(string bucketName, string keyName, RequestPayer requestPayer)
         {
             string responseBody = "";
             try
@@ -30,13 +31,13 @@ namespace Thulir.Aws
                 using (Stream responseStream = response.ResponseStream)
                 using (StreamReader reader = new StreamReader(responseStream))
                 {
-                    string title = response.Metadata["x-amz-meta-title"]; // Assume you have "title" as medata added to the object.
+                    string title =
+                        response.Metadata["x-amz-meta-title"]; // Assume you have "title" as medata added to the object.
                     string contentType = response.Headers["Content-Type"];
                     Console.WriteLine("Object metadata, Title: {0}", title);
                     Console.WriteLine("Content type: {0}", contentType);
 
                     responseBody = reader.ReadToEnd(); // Now you process the response body.
-                    
                 }
             }
             catch (AmazonS3Exception e)
@@ -50,6 +51,36 @@ namespace Thulir.Aws
             }
 
             return responseBody;
+        }
+
+        public async Task SaveFileContent(string bucketName, string keyName, RequestPayer requestPayer,
+            string contentType, string data)
+        {
+            string responseBody = "";
+            try
+            {
+                PutObjectRequest request = new PutObjectRequest
+                {
+                    BucketName = bucketName,
+                    Key = keyName,
+                    RequestPayer = requestPayer,
+                    ContentBody = data,
+                    ContentType = contentType
+                };
+
+                await client.PutObjectAsync(request);
+            }
+            catch (AmazonS3Exception e)
+            {
+                // If bucket or object does not exist
+                Console.WriteLine("Error encountered ***. Message:'{0}' when reading object", e.Message);
+                throw;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when reading object", e.Message);
+                throw;
+            }
         }
     }
 }
