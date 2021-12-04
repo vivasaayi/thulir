@@ -28,6 +28,7 @@ namespace Thulir.ReactUI.Controllers
                 pathsList.ToList(),
                 rowsList.ToList()
             );
+            
             return catalog;
         }
 

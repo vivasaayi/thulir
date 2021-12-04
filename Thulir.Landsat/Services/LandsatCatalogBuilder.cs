@@ -46,7 +46,10 @@ namespace Thulir.Landsat.Services
                 outputFile.WriteLine(jsonString);
             }
             
-            return null;
+            return new LandsatCatalog()
+            {
+                Links = _allItems.ToArray()
+            };
         }
 
         public async Task<LandsatCatalog> GetCatalog(int currentLevel, string key)
