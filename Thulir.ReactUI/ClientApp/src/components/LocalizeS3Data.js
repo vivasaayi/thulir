@@ -16,6 +16,7 @@ export class LocalizeS3Data extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            pendingFiles: ""
         };
 
         this.fetchCatalog = this.fetchCatalog.bind(this);
@@ -78,6 +79,11 @@ export class LocalizeS3Data extends Component {
                             <CButton color="primary" onClick={() => this.localizeS3Files()}>Localize S3 files</CButton>
                         </CCol>
                     </CRow>
+                    <CRow>
+                        <CCol size="sm">
+                            {JSON.stringify(this.state.pendingFiles)}
+                        </CCol>
+                    </CRow>
                 </CContainer>
             </CForm>
 
@@ -86,9 +92,9 @@ export class LocalizeS3Data extends Component {
 
     async localizeS3Files() {
         try {
-            const response = await fetch(`/api/landsatcatalogbuilder/localize-s3-files`);
+            const response = await fetch(`/api/landsatawsdataset/catalog/sync-s3`);
             const data = await response.json();
-            this.setState({catalog: data, loading: false});
+            this.setState({pendingFiles: data, loading: false});
         } catch (ex) {
             console.log(ex)
         }

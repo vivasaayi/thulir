@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ namespace Thulir.ReactUI.Controllers
     public class LandsatAwsDataSetController : ControllerBase
     {
         ILandsatDataSource _landsatDataSource = new LandsatDataSource();
+        private ILandsatDataCopier _landsatDataCopier = new LandsatDataCopier();
         string _level2KeyName = "collection02/level-2/catalog.json";
 
         [HttpGet("catalog")]
@@ -25,10 +27,11 @@ namespace Thulir.ReactUI.Controllers
             return catalog;
         }
         
-        [HttpGet("welcome2")]
-        public string Welcome2()
+        [HttpGet("catalog/sync-s3")]
+        public async Task<List<string>> catalog()
         {
-            return "This is the Welcome2 action method...";
+            var pendingFiles = await _landsatDataCopier.SyncS3Files();
+            return pendingFiles;
         }
     }
 }

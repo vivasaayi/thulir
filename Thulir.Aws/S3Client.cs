@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Amazon;
@@ -56,7 +57,6 @@ namespace Thulir.Aws
         public async Task SaveFileContent(string bucketName, string keyName, RequestPayer requestPayer,
             string contentType, string data)
         {
-            string responseBody = "";
             try
             {
                 PutObjectRequest request = new PutObjectRequest
@@ -81,6 +81,61 @@ namespace Thulir.Aws
                 Console.WriteLine("Unknown encountered on server. Message:'{0}' when reading object", e.Message);
                 throw;
             }
+        }
+
+        public async Task<List<S3Object>> GetFileNames(string bucketName, RequestPayer requestPayer)
+        {
+            try
+            {
+                ListObjectsV2Request request = new ListObjectsV2Request()
+                {
+                    BucketName = bucketName,
+                    RequestPayer = requestPayer
+                };
+
+                var response = await client.ListObjectsV2Async(request);
+
+                return response.S3Objects;
+            }
+            catch (AmazonS3Exception e)
+            {
+                // If bucket or object does not exist
+                Console.WriteLine("Error encountered ***. Message:'{0}' when reading object", e.Message);
+                throw;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when reading object", e.Message);
+                throw;
+            }
+        }
+
+        public async Task<string> CopyObject(string sourceBucket, string sourceObjectKey, string destinationBucket,
+            string destObjectKey, RequestPayer requestPayer)
+        {
+            try
+            {
+                CopyObjectRequest request = new CopyObjectRequest
+                {
+                    SourceBucket = sourceBucket,
+                    SourceKey = sourceObjectKey,
+                    DestinationBucket = destinationBucket,
+                    DestinationKey = destObjectKey,
+                    RequestPayer = requestPayer
+                };
+                CopyObjectResponse response = await client.CopyObjectAsync(request);
+                return response.LastModified;
+            }
+            catch (AmazonS3Exception e)
+            {
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+
+            return "";
         }
     }
 }

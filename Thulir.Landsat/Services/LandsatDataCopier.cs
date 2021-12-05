@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Amazon.Runtime.Internal;
 using Thulir.Landsat.Models;
+using Thulir.Landsat.Repositories;
 
 namespace Thulir.Landsat.Services
 {
@@ -13,6 +14,9 @@ namespace Thulir.Landsat.Services
     {
         private Dictionary<string, string> _stBandNameToFileMap;
         private Dictionary<string, string> _srBandNameToFileMap;
+
+        private ILandsatCatalogBuilder _landsatCatalogBuilder;
+        private IS3DataSets _s3DataSets;
 
         public LandsatDataCopier()
         {
@@ -40,6 +44,9 @@ namespace Thulir.Landsat.Services
             _srBandNameToFileMap.Add("swir16", "SR_B6.TIF");
             _srBandNameToFileMap.Add("swir22", "SR_B7.TIF");
             _srBandNameToFileMap.Add("qa_aerosol", "QA_AEROSOL.TIF");
+
+            _landsatCatalogBuilder = new LandsatCatalogBuilder();
+            _s3DataSets = new S3DataSets();
         }
 
         private Dictionary<string, string> GetSTFileNames(string fileName)
@@ -104,6 +111,11 @@ namespace Thulir.Landsat.Services
                 links =  JsonSerializer.Deserialize<LandsatCatalogItem[]>(sr.ReadToEnd());
             }
 
+            return this.GetFileNamesFromCatalog(links, filters);
+        }
+
+        private List<string> GetFileNamesFromCatalog(LandsatCatalogItem[] links, List<string> filters)
+        {
             var filesToBeCopied = new List<string>();
             
             foreach (var link in links)
@@ -145,6 +157,41 @@ namespace Thulir.Landsat.Services
             }
 
             return filesToBeCopied;
+        }
+
+        public async Task<List<string>> SyncS3Files()
+        {
+            var catalog = await _landsatCatalogBuilder.GetIndexedCatalog();
+            
+            var filesToBeCopied = this.GetFileNamesFromCatalog(catalog.Links, new List<string>(){
+                "coastal", "blue", "green", "red", "nir08", "swir16", "swir22"
+            });
+
+            var files = await _s3DataSets.GetFiles();
+
+            var pendingFiles = new List<string>();
+
+            foreach (var file in filesToBeCopied)
+            {
+                var split = file.Split("/");
+                string keyName = split[split.Length - 1];
+
+                if (!files.Contains(keyName))
+                {
+                    pendingFiles.Add(file);
+                }
+            }
+            
+
+            foreach(var file in pendingFiles)
+            {
+                var split = file.Split("/");
+                string keyName = split[split.Length - 1];
+                
+                var result = await _s3DataSets.CopyFile(file, keyName);
+            }
+            
+            return pendingFiles;
         }
     }
 }

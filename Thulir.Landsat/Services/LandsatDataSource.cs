@@ -17,5 +17,10 @@ namespace Thulir.Landsat.Services
             var catalog = await _awsDataInterface.ListC2L2DataCatalog(key);
             return catalog;
         }
+
+        public void GetFilesInDataSets()
+        {
+            
+        }
     }
 }
