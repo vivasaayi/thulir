@@ -17,7 +17,7 @@ export class LocalizeS3Data extends Component {
         super(props);
         this.state = {
             pendingFiles: "",
-            targetDir: "dsds"
+            targetDir: "/data/landsat"
         };
 
         this.fetchCatalog = this.fetchCatalog.bind(this);
@@ -76,7 +76,7 @@ export class LocalizeS3Data extends Component {
                 <CContainer>
                     <CRow>
                         <CCol size="sm">
-                            <CFormInput id="years" value={this.state.targetDir} onChange={(e) => this.onDirNameChange(e)}/>
+                            <CFormInput id="targetDir" value={this.state.targetDir} onChange={(e) => this.onTargetDirChange(e)}/>
                         </CCol>
                     </CRow>
                     <CRow>
@@ -98,7 +98,7 @@ export class LocalizeS3Data extends Component {
         </div>;
     }
 
-    onDirNameChange(event) {
+    onTargetDirChange(event) {
         this.setState({
             targetDir: event.target.value
         });
@@ -116,7 +116,8 @@ export class LocalizeS3Data extends Component {
 
     async syncS3FilesToDir() {
         try {
-            const response = await fetch(`/api/landsattilegenerator/sync-s3files-to-local-disk`);
+            debugger;
+            const response = await fetch(`/api/landsattilegenerator/sync-s3files-to-local-disk?location=${this.state.targetDir}`);
             const data = await response.json();
             alert(data);
         } catch (ex) {
