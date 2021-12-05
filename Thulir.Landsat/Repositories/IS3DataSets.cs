@@ -10,5 +10,7 @@ namespace Thulir.Landsat.Repositories
         public Task<List<string>> GetFiles();
 
         public Task<string> CopyFile(string sourceObjectKey, string destinationObjectKey);
+
+        public Task SyncS3DirectoryToLocal(string keyName, string directory);
     }
 }

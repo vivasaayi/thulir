@@ -16,7 +16,8 @@ export class LocalizeS3Data extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pendingFiles: ""
+            pendingFiles: "",
+            targetDir: "dsds"
         };
 
         this.fetchCatalog = this.fetchCatalog.bind(this);
@@ -32,7 +33,7 @@ export class LocalizeS3Data extends Component {
 
 
     renderCatalog(catalog) {
-        if(!catalog){
+        if (!catalog) {
             return <div>Catalog Not Loaded</div>
         }
 
@@ -75,8 +76,15 @@ export class LocalizeS3Data extends Component {
                 <CContainer>
                     <CRow>
                         <CCol size="sm">
-                            <CButton color="primary" onClick={() => this.fetchCatalog()}>Fetch Catalog</CButton> 
+                            <CFormInput id="years" value={this.state.targetDir} onChange={(e) => this.onDirNameChange(e)}/>
+                        </CCol>
+                    </CRow>
+                    <CRow>
+                        <CCol size="sm">
+                            <CButton color="primary" onClick={() => this.fetchCatalog()}>Fetch Catalog</CButton>
                             <CButton color="primary" onClick={() => this.localizeS3Files()}>Localize S3 files</CButton>
+                            <CButton color="primary" onClick={() => this.syncS3FilesToDir()}>Sync S3 files To
+                                Disk</CButton>
                         </CCol>
                     </CRow>
                     <CRow>
@@ -90,11 +98,27 @@ export class LocalizeS3Data extends Component {
         </div>;
     }
 
+    onDirNameChange(event) {
+        this.setState({
+            targetDir: event.target.value
+        });
+    }
+
     async localizeS3Files() {
         try {
             const response = await fetch(`/api/landsatawsdataset/catalog/sync-s3`);
             const data = await response.json();
             this.setState({pendingFiles: data, loading: false});
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+    async syncS3FilesToDir() {
+        try {
+            const response = await fetch(`/api/landsattilegenerator/sync-s3files-to-local-disk`);
+            const data = await response.json();
+            alert(data);
         } catch (ex) {
             console.log(ex)
         }

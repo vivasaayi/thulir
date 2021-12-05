@@ -37,5 +37,10 @@ namespace Thulir.Landsat.Repositories
                 RequestPayer.Requester);
             return result;
         }
+
+        public async Task SyncS3DirectoryToLocal(string keyName, string directory)
+        {
+            await _s3Client.SyncS3ToLocal("rajans-test-bucket", keyName, directory);
+        }
     }
 }

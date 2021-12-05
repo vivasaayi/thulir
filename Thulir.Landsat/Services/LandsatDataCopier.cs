@@ -193,5 +193,10 @@ namespace Thulir.Landsat.Services
             
             return pendingFiles;
         }
+
+        public async Task SyncS3FolderToLocal(string keyName, string directory)
+        {
+            await _s3DataSets.SyncS3DirectoryToLocal(keyName, directory);
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
+using Amazon.S3.Transfer;
 
 namespace Thulir.Aws
 {
@@ -136,6 +137,30 @@ namespace Thulir.Aws
             }
 
             return "";
+        }
+        
+        public async Task SyncS3ToLocal(string bucketName, string keyName, string localDirectory)
+        {
+            try
+            {
+                var request = new TransferUtilityDownloadDirectoryRequest()
+                {
+                    BucketName = bucketName,
+                    LocalDirectory = localDirectory,
+                    DownloadFilesConcurrently = true,
+                    S3Directory = keyName
+                };
+                
+                new TransferUtility(client).DownloadDirectory(request);
+            }
+            catch (AmazonS3Exception e)
+            {
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
         }
     }
 }
