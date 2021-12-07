@@ -18,8 +18,8 @@ export class CatalogBuilder extends Component {
         this.state = {
             instrument: "oli-tirs",
             years: "2019,2020,2021",
-            paths: "144",
-            rows: "053"
+            paths: "143",
+            rows: "054"
         };
 
         this.fetchCatalog = this.fetchCatalog.bind(this);
