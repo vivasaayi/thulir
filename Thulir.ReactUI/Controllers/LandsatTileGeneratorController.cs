@@ -19,6 +19,7 @@ namespace Thulir.ReactUI.Controllers
             {
                 location = "/Users/rajanp/tests3sync";
             }
+
             await _landsatDataCopier.SyncS3FolderToLocal("/", location);
         }
     }
