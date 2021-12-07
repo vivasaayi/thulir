@@ -125,6 +125,7 @@ namespace Thulir.Aws
                     RequestPayer = requestPayer
                 };
                 CopyObjectResponse response = await client.CopyObjectAsync(request);
+                Console.WriteLine("File Copied: " + sourceObjectKey);
                 return response.LastModified;
             }
             catch (AmazonS3Exception e)
