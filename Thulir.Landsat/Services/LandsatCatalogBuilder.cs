@@ -13,6 +13,7 @@ namespace Thulir.Landsat.Services
     {
         private IAwsDataInterface _awsDataInterface;
         private ICatalogRepository _catalogRepository;
+        private IS3DataSets _s3DataSets;
         
         string level2KeyName = "collection02/level-2/catalog.json";
         
@@ -20,10 +21,14 @@ namespace Thulir.Landsat.Services
 
         private List<LandsatCatalogItem> _allItems = new List<LandsatCatalogItem>();
 
+        private List<string> _cachedFileNames = new List<string>();
+
         public LandsatCatalogBuilder()
         {
             _awsDataInterface = new AwsDataInterface();
             _catalogRepository = new CatalogRepository();
+            _s3DataSets = new S3DataSets();
+            
         }
 
         public async Task<LandsatCatalog> GetIndexedCatalog()
@@ -90,6 +95,27 @@ namespace Thulir.Landsat.Services
             }
 
             return catalog;
+        }
+
+        public async Task<List<string>> GetFiles()
+        {
+            if(_cachedFileNames.Any())
+            {
+                return _cachedFileNames;
+            }
+            
+            var files = await _s3DataSets.GetFiles();
+
+
+            foreach (var file in files)
+            {
+                if (file.EndsWith("_B1.TIF"))
+                {
+                    _cachedFileNames.Add(file.Replace("_SR_B1.TIF", ""));
+                }
+            }
+            
+            return _cachedFileNames;
         }
     }
 }

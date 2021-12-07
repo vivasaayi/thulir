@@ -43,7 +43,7 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="text-dark" to="/localize-s3-data">Localize S3 Data</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/generate-tiles">Generate Tiles</NavLink>
+                  <NavLink tag={Link} className="text-dark" to="/generate-tiles">Generate/View Tiles</NavLink>
                 </NavItem>
               </ul>
             </Collapse>
