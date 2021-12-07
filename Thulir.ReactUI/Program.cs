@@ -24,12 +24,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-
-// app.UseStaticFiles(new StaticFileOptions()
-// {
-//     FileProvider = new PhysicalFileProvider("/data/landsat-tiles"),
-//     RequestPath = new PathString("/landsat-tile")
-// });
+if (!app.Environment.IsDevelopment())
+{
+    app.UseStaticFiles(new StaticFileOptions()
+    {
+        FileProvider = new PhysicalFileProvider("/data/landsat-tiles"),
+        RequestPath = new PathString("/landsat-tile")
+    });
+}
 
 app.MapControllerRoute(
     "default",

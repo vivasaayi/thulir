@@ -2,7 +2,7 @@
 export PATH=/home/ec2-user/.dotnet:$PATH
 export ASPNETCORE_URLS="http://*:80;https://*:443"
 
-cd thulir
+cd ~/thulir
 git pull
 dotnet publish -r linux-x64 -o ~/ThulirWeb
 
