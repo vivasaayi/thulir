@@ -45,6 +45,9 @@ export class NavMenu extends Component {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/generate-tiles">Generate/View Tiles</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/weather">Weather</NavLink>
+                </NavItem>
               </ul>
             </Collapse>
           </Container>

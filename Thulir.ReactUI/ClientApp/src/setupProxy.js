@@ -9,7 +9,9 @@ const context = [
     "/api/landsatawsdataset",
     "/api/landsatcatalogbuilder",
     "/api/landsattilegenerator",
-    "/landsat-tile"
+    "/landsat-tile",
+    "/api/weather",
+    "/api/news"
 ];
 
 module.exports = function (app) {

@@ -6,6 +6,7 @@ import {LandsatDataSetBrowser} from './components/LandsatDataSetBrowser';
 import {CatalogBuilder} from './components/CatalogBuilder';
 import {LocalizeS3Data} from './components/LocalizeS3Data'
 import {TileGenerator} from './components/TileGenerator'
+import {WeatherViewer} from "./components/WeatherViewer";
 
 import './custom.css'
 
@@ -20,6 +21,7 @@ export default class App extends Component {
                 <Route path='/browse-landsat-data' component={LandsatDataSetBrowser}/>
                 <Route path='/localize-s3-data' component={LocalizeS3Data}/>
                 <Route path='/generate-tiles' component={TileGenerator}/>
+                <Route path='/weather' component={WeatherViewer}/>
             </Layout>
         );
     }

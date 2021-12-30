@@ -25,7 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Thulir.FarmersLog\Thulir.FarmersLog.csproj" />
     <ProjectReference Include="..\Thulir.Landsat\Thulir.Landsat.csproj" />
+    <ProjectReference Include="..\Thulir.News\Thulir.News.csproj" />
+    <ProjectReference Include="..\Thulir.Weather\Thulir.Weather.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
