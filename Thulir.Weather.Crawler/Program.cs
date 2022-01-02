@@ -8,4 +8,6 @@ Console.WriteLine("Hello, World!");
 CrawlerService crawlerService = new CrawlerService();
 
 crawlerService.Init();
-crawlerService.Start();
+await crawlerService.Start();
+
+Console.WriteLine("Program Exiting...");

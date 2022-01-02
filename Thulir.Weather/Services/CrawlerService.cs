@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Thulir.Weather.Crawler.crawlers;
 
 namespace Thulir.Weather.Crawler.Services
@@ -15,7 +16,7 @@ namespace Thulir.Weather.Crawler.Services
             crawlers.Add(new OpenWeatherCrawler());
         }
         
-        public async void Start()
+        public async Task Start()
         {
             while (true)
             {

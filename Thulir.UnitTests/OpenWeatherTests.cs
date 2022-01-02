@@ -97,8 +97,21 @@ namespace Thulir.UnitTests
             Assert.AreEqual(dailyForecaseWeatherForecast.TimeStamp, 1641537000);
             Assert.AreEqual(dailyForecaseWeatherForecast.Sunrise, 1641517621); // This value is not available for Hourly Forecast
             Assert.AreEqual(dailyForecaseWeatherForecast.Sunset, 1641559488); // This value is not available for Hourly Forecast
-            // Assert.AreEqual(dailyForecaseWeatherInfo.Temperature, 26.55);
-            // Assert.AreEqual(dailyForecaseWeatherInfo.FeelsLike, 26.55);
+            
+            Assert.AreEqual(dailyForecaseWeatherForecast.Temperature.Day, 26.82);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Temperature.Night, 22.43);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Temperature.Min, 20.85);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Temperature.Max, 29.18);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Temperature.Morning, 20.85);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Temperature.Evening, 27.69);
+            
+            Assert.AreEqual(dailyForecaseWeatherForecast.FeelsLike.Day, 27.54);
+            Assert.AreEqual(dailyForecaseWeatherForecast.FeelsLike.Night, 22.53);
+            Assert.AreEqual(dailyForecaseWeatherForecast.FeelsLike.Min, 0);
+            Assert.AreEqual(dailyForecaseWeatherForecast.FeelsLike.Max, 0);
+            Assert.AreEqual(dailyForecaseWeatherForecast.FeelsLike.Morning, 21.11);
+            Assert.AreEqual(dailyForecaseWeatherForecast.FeelsLike.Evening, 28.45);
+            
             Assert.AreEqual(dailyForecaseWeatherForecast.Pressure, 1016);
             Assert.AreEqual(dailyForecaseWeatherForecast.Humidity, 55);
             Assert.AreEqual(dailyForecaseWeatherForecast.DewPoint, 17.04);
@@ -190,8 +203,21 @@ namespace Thulir.UnitTests
             Assert.AreEqual(oneCallApiResponse.Daily[3].TimeStamp, 1641277800);
             Assert.AreEqual(oneCallApiResponse.Daily[3].Sunrise, 1641258357); // This value is not available for Hourly Forecast
             Assert.AreEqual(oneCallApiResponse.Daily[3].Sunset, 1641300195); // This value is not available for Hourly Forecast
-            // Assert.AreEqual(oneCallApiResponse.Daily[3].Temperature, 26.55);
-            // Assert.AreEqual(oneCallApiResponse.Daily[3].FeelsLike, 26.55);
+            
+            Assert.AreEqual(oneCallApiResponse.Daily[3].Temperature.Day, 27.62);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].Temperature.Night, 23.75);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].Temperature.Min, 21.74);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].Temperature.Max, 29.76);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].Temperature.Morning, 21.74);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].Temperature.Evening, 28.27);
+            
+            Assert.AreEqual(oneCallApiResponse.Daily[3].FeelsLike.Day, 29);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].FeelsLike.Night, 24.11);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].FeelsLike.Min, 0);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].FeelsLike.Max, 0);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].FeelsLike.Morning, 22.16);
+            Assert.AreEqual(oneCallApiResponse.Daily[3].FeelsLike.Evening, 29.5);
+            
             Assert.AreEqual(oneCallApiResponse.Daily[3].Pressure, 1015);
             Assert.AreEqual(oneCallApiResponse.Daily[3].Humidity, 61);
             Assert.AreEqual(oneCallApiResponse.Daily[3].DewPoint, 19.36);
