@@ -5,7 +5,7 @@ namespace Thulir.Weather.Services
 {
     public interface IWeatherService
     {
-        public Task<WeatherInfo[]> GetWeatherData();
+        public Task<OpenWeatherInfo> GetWeatherData();
         public void GetWeatherAlerts();
     }
 }

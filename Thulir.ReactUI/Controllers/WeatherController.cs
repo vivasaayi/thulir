@@ -17,7 +17,7 @@ namespace Thulir.ReactUI.Controllers
         private IWeatherService _weatherService = new WeatherService();
         
         [HttpGet("current-weather")]
-        public async Task<WeatherInfo[]> GetCurrentWeather(string? location)
+        public async Task<OpenWeatherInfo> GetCurrentWeather(string? location)
         {
             if (string.IsNullOrEmpty(location))
             {

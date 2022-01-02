@@ -6,16 +6,9 @@ namespace Thulir.Weather.Services
 {
     public class WeatherService: IWeatherService
     {
-        public async Task<WeatherInfo[]> GetWeatherData()
+        public async Task<OpenWeatherInfo> GetWeatherData()
         {
-            var result = new List<WeatherInfo>();
-
-            result.Add(new WeatherInfo());
-            result.Add(new WeatherInfo());
-            result.Add(new WeatherInfo());
-            
-            
-            return result.ToArray();
+            return new OpenWeatherInfo();
         }
 
         public void GetWeatherAlerts()
