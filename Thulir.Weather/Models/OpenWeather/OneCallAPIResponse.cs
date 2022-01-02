@@ -5,6 +5,9 @@ namespace Thulir.Weather.Models.OpenWeather
 {
     public class OneCallAPIResponse
     {
+        [JsonPropertyName("cityid")]
+        public string CityId { get; set; }
+        
         [JsonPropertyName("lat")]
         public double Lattitude { get; set; }
         

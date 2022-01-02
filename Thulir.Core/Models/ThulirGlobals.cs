@@ -6,5 +6,8 @@ namespace Thulir.Core.Models
     {
         [JsonPropertyName("openWeatherAppKey")]
         public string OpenWeatherAppKey { get; set; }
+        
+        [JsonPropertyName("elasticsearchurl")]
+        public string ElasticSearchUrl { get; set; }
     }
 }
