@@ -5,6 +5,6 @@ namespace Thulir.Weather.Proxies
 {
     public interface IWeatherSourceProxy
     {
-        public Task<OpenWeatherInfo> GetWeatherInfo();
+        public Task<OWCurrentWeatherInfo> GetWeatherInfo();
     }
 }

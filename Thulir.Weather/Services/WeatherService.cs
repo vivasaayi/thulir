@@ -6,9 +6,9 @@ namespace Thulir.Weather.Services
 {
     public class WeatherService: IWeatherService
     {
-        public async Task<OpenWeatherInfo> GetWeatherData()
+        public async Task<OWCurrentWeatherInfo> GetWeatherData()
         {
-            return new OpenWeatherInfo();
+            return new OWCurrentWeatherInfo();
         }
 
         public void GetWeatherAlerts()

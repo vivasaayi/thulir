@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Thulir.Weather.Models.OpenWeather
 {
-    public class OpenWeatherMinutelyForecast
+    public class OWMinutelyForecast
     {
         [JsonPropertyName("dt")]
         public double TimeStamp { get; set; }

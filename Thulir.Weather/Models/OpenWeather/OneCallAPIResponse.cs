@@ -18,15 +18,15 @@ namespace Thulir.Weather.Models.OpenWeather
         public int TimeZoneOffset { get; set; }
         
         [JsonPropertyName("current")]
-        public OpenWeatherInfo Current { get; set; }
+        public OWCurrentWeatherInfo Current { get; set; }
         
         [JsonPropertyName("hourly")]
-        public OpenWeatherInfo[] Hourly { get; set; }
+        public OWCurrentWeatherInfo[] Hourly { get; set; }
         
         [JsonPropertyName("daily")]
-        public OWDailyWeatherInfo[] Daily { get; set; }
+        public OWDailyWeatherForecast[] Daily { get; set; }
         
         [JsonPropertyName("minutely")]
-        public  OpenWeatherMinutelyForecast[] Minutely { get; set; }
+        public  OWMinutelyForecast[] Minutely { get; set; }
     }
 }

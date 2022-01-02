@@ -32,7 +32,7 @@ namespace Thulir.UnitTests
         [Test]
         public void Test_Parse_WeatherInfo()
         {
-            OpenWeatherInfo currentWeatherInfo = JsonSerializer.Deserialize<OpenWeatherInfo>(currentWeatherInfoDataStr);
+            OWCurrentWeatherInfo currentWeatherInfo = JsonSerializer.Deserialize<OWCurrentWeatherInfo>(currentWeatherInfoDataStr);
             
             Assert.AreEqual(currentWeatherInfo.TimeStamp, 1640978589);
             Assert.AreEqual(currentWeatherInfo.Sunrise, 1640999087);
@@ -62,7 +62,7 @@ namespace Thulir.UnitTests
         [Test]
         public void Test_Parse_HourlyForecast()
         {
-            OpenWeatherInfo hourlyForecastWeatherInfo =  JsonSerializer.Deserialize<OpenWeatherInfo>(hourlyForcastWeatherInfoDataStr);
+            OWCurrentWeatherInfo hourlyForecastWeatherInfo =  JsonSerializer.Deserialize<OWCurrentWeatherInfo>(hourlyForcastWeatherInfoDataStr);
 
             Assert.AreEqual(hourlyForecastWeatherInfo.TimeStamp, 1641088800);
             Assert.AreEqual(hourlyForecastWeatherInfo.Sunrise, 0); // This value is not available for Hourly Forecast
@@ -92,31 +92,31 @@ namespace Thulir.UnitTests
         [Test]
         public void Test_Parse_DailyForecast()
         {
-            OWDailyWeatherInfo dailyForecaseWeatherInfo =  JsonSerializer.Deserialize<OWDailyWeatherInfo>(dailyForcastWeatherInfoDataStr);
+            OWDailyWeatherForecast dailyForecaseWeatherForecast =  JsonSerializer.Deserialize<OWDailyWeatherForecast>(dailyForcastWeatherInfoDataStr);
 
-            Assert.AreEqual(dailyForecaseWeatherInfo.TimeStamp, 1641537000);
-            Assert.AreEqual(dailyForecaseWeatherInfo.Sunrise, 1641517621); // This value is not available for Hourly Forecast
-            Assert.AreEqual(dailyForecaseWeatherInfo.Sunset, 1641559488); // This value is not available for Hourly Forecast
+            Assert.AreEqual(dailyForecaseWeatherForecast.TimeStamp, 1641537000);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Sunrise, 1641517621); // This value is not available for Hourly Forecast
+            Assert.AreEqual(dailyForecaseWeatherForecast.Sunset, 1641559488); // This value is not available for Hourly Forecast
             // Assert.AreEqual(dailyForecaseWeatherInfo.Temperature, 26.55);
             // Assert.AreEqual(dailyForecaseWeatherInfo.FeelsLike, 26.55);
-            Assert.AreEqual(dailyForecaseWeatherInfo.Pressure, 1016);
-            Assert.AreEqual(dailyForecaseWeatherInfo.Humidity, 55);
-            Assert.AreEqual(dailyForecaseWeatherInfo.DewPoint, 17.04);
-            Assert.AreEqual(dailyForecaseWeatherInfo.UVI, 11);
-            Assert.AreEqual(dailyForecaseWeatherInfo.Clouds, 48);
-            Assert.AreEqual(dailyForecaseWeatherInfo.Visibility, 0); // This value is not available for Daily Forecast
-            Assert.AreEqual(dailyForecaseWeatherInfo.WindSpeed, 3.53);
-            Assert.AreEqual(dailyForecaseWeatherInfo.WindDegree, 33);
-            Assert.AreEqual(dailyForecaseWeatherInfo.WindGust, 5.04);
-            Assert.AreEqual(dailyForecaseWeatherInfo.Pop, 0);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Pressure, 1016);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Humidity, 55);
+            Assert.AreEqual(dailyForecaseWeatherForecast.DewPoint, 17.04);
+            Assert.AreEqual(dailyForecaseWeatherForecast.UVI, 11);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Clouds, 48);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Visibility, 0); // This value is not available for Daily Forecast
+            Assert.AreEqual(dailyForecaseWeatherForecast.WindSpeed, 3.53);
+            Assert.AreEqual(dailyForecaseWeatherForecast.WindDegree, 33);
+            Assert.AreEqual(dailyForecaseWeatherForecast.WindGust, 5.04);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Pop, 0);
             
-            Assert.NotNull(dailyForecaseWeatherInfo.Weather);
-            Assert.AreEqual(dailyForecaseWeatherInfo.Weather.Length, 1);
+            Assert.NotNull(dailyForecaseWeatherForecast.Weather);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Weather.Length, 1);
             
-            Assert.AreEqual(dailyForecaseWeatherInfo.Weather[0].Id, 802);
-            Assert.AreEqual(dailyForecaseWeatherInfo.Weather[0].Main, "Clouds");
-            Assert.AreEqual(dailyForecaseWeatherInfo.Weather[0].Description, "scattered clouds");
-            Assert.AreEqual(dailyForecaseWeatherInfo.Weather[0].Icon, "03d");
+            Assert.AreEqual(dailyForecaseWeatherForecast.Weather[0].Id, 802);
+            Assert.AreEqual(dailyForecaseWeatherForecast.Weather[0].Main, "Clouds");
+            Assert.AreEqual(dailyForecaseWeatherForecast.Weather[0].Description, "scattered clouds");
+            Assert.AreEqual(dailyForecaseWeatherForecast.Weather[0].Icon, "03d");
         }
 
         

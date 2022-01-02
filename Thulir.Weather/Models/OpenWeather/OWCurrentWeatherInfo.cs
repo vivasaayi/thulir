@@ -3,7 +3,7 @@ using Thulir.Weather.Models.OpenWeather;
 
 namespace Thulir.Weather.Models
 {
-    public class OpenWeatherInfo : OWBaseWeatherInfo
+    public class OWCurrentWeatherInfo : OWBaseWeatherInfo
     {
         [JsonPropertyName("temp")]
         public double Temperature  { get; set; }
