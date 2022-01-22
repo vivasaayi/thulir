@@ -6,7 +6,6 @@ git pull
 dotnet restore
 
 dotnet publish -r linux-x64 -o ~/ThulirCrawler
-
 cd ~/ThulirCrawler
 ./Thulir.Weather.Crawler
 ```
