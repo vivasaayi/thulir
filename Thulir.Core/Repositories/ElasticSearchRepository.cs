@@ -58,7 +58,11 @@ namespace Thulir.Core.Repositories
             {
                 return indexResponse.Id;
             }
-            
+
+            Console.WriteLine("Unable to save document to Elastic Search");
+            Console.WriteLine(indexResponse.ApiCall.HttpStatusCode);
+            Console.WriteLine(indexResponse);
+
             return "";
         }
     }
