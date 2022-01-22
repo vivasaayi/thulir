@@ -36,7 +36,7 @@ namespace Thulir.Weather.Crawler.crawlers
         
         public async Task Crawl()
         {
-            InitElasticSearchRepo();
+            await InitElasticSearchRepo();
             Console.WriteLine("Crawling OpenWeather Endpoints");
 
             await _elasticSearchRepository.ListIndices();
@@ -45,10 +45,6 @@ namespace Thulir.Weather.Crawler.crawlers
 
             foreach (var city in cities)
             {
-                if (city == null)
-                {
-                    System.Console.WriteLine("City is null");    
-                }
                 System.Console.WriteLine(city);
                 await CrawlLocation(city.Lattitude, city.Longitude, city.Name);
             }
