@@ -3,7 +3,7 @@
 using System;
 using Thulir.Weather.Crawler.Services;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Hello, from the crawler!");
 
 CrawlerService crawlerService = new CrawlerService();
 
