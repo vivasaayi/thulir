@@ -23,8 +23,10 @@ namespace Thulir.Weather.Crawler.crawlers
             {
                 return;    
             }
+            Console.WriteLine("Initializing ElasticSearch Repository");
             ThulirGlobals globals = await _secrets.GetThulirGlobals();
             _elasticSearchRepository = new ElasticSearchRepository("weather", globals.ElasticSearchUrl);
+            Console.WriteLine("ElasticSearch Repository initialized");
         }
         
         public async Task CrawlLocation(double lattitude, double longitude, string locationId)
