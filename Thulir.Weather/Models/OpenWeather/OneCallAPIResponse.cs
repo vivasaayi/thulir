@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -31,5 +32,9 @@ namespace Thulir.Weather.Models.OpenWeather
         
         [JsonPropertyName("minutely")]
         public  OWMinutelyForecast[] Minutely { get; set; }
+
+        [JsonPropertyName("@timestamp")]
+        public double TimeStamp { get; set; }
+        
     }
 }

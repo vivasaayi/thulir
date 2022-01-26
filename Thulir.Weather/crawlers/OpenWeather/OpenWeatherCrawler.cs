@@ -33,6 +33,7 @@ namespace Thulir.Weather.Crawler.crawlers
         {
             OneCallAPIResponse result =  await _proxy.MakeOneCallApi(lattitude, longitude);
             result.CityId = locationId;
+            result.TimeStamp = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds;
             await _elasticSearchRepository.SaveDoc(result);
         }
         

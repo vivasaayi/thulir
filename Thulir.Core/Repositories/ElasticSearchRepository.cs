@@ -52,7 +52,9 @@ namespace Thulir.Core.Repositories
 
         public async Task<string> SaveDoc(Object data)
         {
-            var indexResponse = await client.IndexAsync(data, i => i.Index(this.indexName));
+            var indexResponse = await client.IndexAsync(data, i => 
+                 i.Index(this.indexName)
+                );
             
             if (indexResponse.ApiCall.Success)
             {
