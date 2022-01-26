@@ -1,13 +1,33 @@
 
 
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
+using Newtonsoft.Json.Linq;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace Thulir.Core.Dals
 {
+    
+    public class JObjectHandler : SqlMapper.TypeHandler<JObject>
+    {
+        public JObjectHandler() { }
+        public static JObjectHandler Instance { get; } = new JObjectHandler();
+        public override JObject Parse(object value)
+        {
+            var json = value.ToString();
+            return json == null ? null : JObject.Parse(json);
+        }
+        public override void SetValue(IDbDataParameter parameter, JObject value)
+        {	
+            parameter.Value = value?.ToString(Newtonsoft.Json.Formatting.None);
+            ((NpgsqlParameter)parameter).NpgsqlDbType = NpgsqlDbType.Jsonb;
+        }
+    }
+    
     public class PostgresDal
     {
         private static PostgresDal Instance;
@@ -18,6 +38,8 @@ namespace Thulir.Core.Dals
         public static void Init(PostgresConfig config)
         {
             _postgresConfig = config;
+            NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
+            SqlMapper.AddTypeHandler(new JObjectHandler());
         }
         
         public static PostgresDal GetInstance()
@@ -40,9 +62,9 @@ namespace Thulir.Core.Dals
             return connection;
         }
 
-        public async Task<IEnumerable<T>> ExecuteQuery<T>(string command)
+        public async Task<IEnumerable<T>> ExecuteQuery<T>(string command, Object parameters)
         {
-            var result   = await GetConnection().QueryAsync<T>(command);
+            var result   = await GetConnection().QueryAsync<T>(command, parameters);
             return result;
         }
     }

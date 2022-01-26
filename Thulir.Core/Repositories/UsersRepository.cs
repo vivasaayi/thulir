@@ -19,7 +19,7 @@ namespace Thulir.Core.Repositories
         {
             var dal = PostgresDal.GetInstance();
             
-            var result = await dal.ExecuteQuery<Credentials>("SELECT * FROM Credentials");
+            var result = await dal.ExecuteQuery<Credentials>("SELECT * FROM Credentials", new {});
 
             Console.WriteLine(result);
         }
