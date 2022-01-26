@@ -8,6 +8,7 @@ using Npgsql;
 using NpgsqlTypes;
 using Thulir.Core.Dals;
 using Thulir.Weather.Models;
+using Thulir.Weather.Models.DB;
 using Thulir.Weather.Models.OpenWeather;
 
 namespace Thulir.Weather.Repositories
@@ -18,6 +19,7 @@ namespace Thulir.Weather.Repositories
         public static JObjectHandler Instance { get; } = new JObjectHandler();
         public override T Parse(object value)
         {
+            var type = typeof(T);
             var json = value.ToString();
             return json == null ? JsonSerializer.Deserialize<T>("") : JsonSerializer.Deserialize<T>(value?.ToString());
         }
@@ -37,6 +39,7 @@ namespace Thulir.Weather.Repositories
             SqlMapper.AddTypeHandler(new GenericTypeHandler<OneCallAPIResponse>());
             SqlMapper.AddTypeHandler(new GenericTypeHandler<OWCurrentWeatherInfo>());
             SqlMapper.AddTypeHandler(new GenericTypeHandler<OWDailyWeatherForecast>());
+            SqlMapper.AddTypeHandler(new GenericTypeHandler<OWDailyWeatherForecast[]>());
         }
         
         public async Task SaveCurrentWeather(OneCallAPIResponse oneCallApiResponse)
@@ -52,7 +55,7 @@ namespace Thulir.Weather.Repositories
             
             var result = await _dal.ExecuteQuery<OneCallAPIResponse>(command, new 
             {
-                city = "abc",
+                city = oneCallApiResponse.CityId,
                 updatedtime = new DateTime(),
                 currentweather = oneCallApiResponse.Current,
                 forecast = oneCallApiResponse.Daily,
@@ -62,11 +65,11 @@ namespace Thulir.Weather.Repositories
             Console.WriteLine("Query Executed");
         }
 
-        public async Task<OneCallAPIResponse> GetCurrentWeather(string city)
+        public async Task<LatestWeather> GetCurrentWeather(string city)
         {
-            string command = "select * from latestweather where city=@city";
+            string command = "select city as City, currentweather as CurrentWeather, forecast as Forecast, rawdata as Raw from latestweather where city=@city";
 
-            var result = await _dal.ExecuteQuery<OneCallAPIResponse>(command, new 
+            var result = await _dal.ExecuteQuery<LatestWeather>(command, new 
             {
                 city = city
             });

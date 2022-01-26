@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Thulir.Landsat.Models;
 using Thulir.Landsat.Services;
 using Thulir.Weather.Models;
+using Thulir.Weather.Models.DB;
 using Thulir.Weather.Services;
 
 namespace Thulir.ReactUI.Controllers
@@ -17,14 +18,14 @@ namespace Thulir.ReactUI.Controllers
         private IWeatherService _weatherService = new WeatherService();
         
         [HttpGet("current-weather")]
-        public async Task<OWCurrentWeatherInfo> GetCurrentWeather(string? location)
+        public async Task<LatestWeather> GetCurrentWeather(string? location)
         {
             if (string.IsNullOrEmpty(location))
             {
                 location = "";
             }
 
-            var result = await _weatherService.GetWeatherData();
+            var result = await _weatherService.GetWeatherData(location);
             return result;
         }
     }

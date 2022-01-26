@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Thulir.Core.Dals;
+using Thulir.Core.Models;
+using Thulir.Core.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,5 +41,15 @@ app.MapControllerRoute(
     "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
+
+await ConfigLoader.GetInstance().Init();
+ThulirGlobals globals = await ConfigLoader.GetInstance().GetGlobals();
+
+PostgresDal.Init(new PostgresConfig(
+    globals.PostgresHost,
+    globals.PostgresUserName,
+    globals.PostgresPassword,
+    globals.PostgresDatabase)
+);
 
 app.Run();

@@ -9,5 +9,20 @@ namespace Thulir.Core.Models
         
         [JsonPropertyName("elasticsearchurl")]
         public string ElasticSearchUrl { get; set; }
+        
+        [JsonPropertyName("postgresHost")]
+        public string PostgresHost { get; set; }
+        
+        [JsonPropertyName("postgresUserName")]
+        public string PostgresUserName { get; set; }
+        
+        [JsonPropertyName("postgresPassword")]
+        public string PostgresPassword { get; set; }
+        
+        [JsonPropertyName("postgresPort")]
+        public string PostgresPort { get; set; }
+        
+        [JsonPropertyName("postgresDatabase")]
+        public string PostgresDatabase { get; set; }
     }
 }
