@@ -7,21 +7,22 @@ using Dapper;
 using Npgsql;
 using NpgsqlTypes;
 using Thulir.Core.Dals;
+using Thulir.Weather.Models;
 using Thulir.Weather.Models.OpenWeather;
 
 namespace Thulir.Weather.Repositories
 {
-    public class OneCallAPIResponseHandler : SqlMapper.TypeHandler<OneCallAPIResponse>
+    public class GenericTypeHandler<T> : SqlMapper.TypeHandler<T>
     {
-        public OneCallAPIResponseHandler() { }
+        public GenericTypeHandler() { }
         public static JObjectHandler Instance { get; } = new JObjectHandler();
-        public override OneCallAPIResponse Parse(object value)
+        public override T Parse(object value)
         {
             var json = value.ToString();
-            return json == null ? null : JsonSerializer.Deserialize<OneCallAPIResponse>(value?.ToString());
+            return json == null ? JsonSerializer.Deserialize<T>("") : JsonSerializer.Deserialize<T>(value?.ToString());
         }
         
-        public override void SetValue(IDbDataParameter parameter, OneCallAPIResponse value)
+        public override void SetValue(IDbDataParameter parameter, T value)
         {	
             parameter.Value = JsonSerializer.Serialize(value);
             ((NpgsqlParameter)parameter).NpgsqlDbType = NpgsqlDbType.Jsonb;
@@ -33,21 +34,28 @@ namespace Thulir.Weather.Repositories
         public WeatherRepository(PostgresDal dal)
         {
             _dal = dal;
-            SqlMapper.AddTypeHandler(new OneCallAPIResponseHandler());
+            SqlMapper.AddTypeHandler(new GenericTypeHandler<OneCallAPIResponse>());
+            SqlMapper.AddTypeHandler(new GenericTypeHandler<OWCurrentWeatherInfo>());
+            SqlMapper.AddTypeHandler(new GenericTypeHandler<OWDailyWeatherForecast>());
         }
         
         public async Task SaveCurrentWeather(OneCallAPIResponse oneCallApiResponse)
         {   
             
-            string command = @"insert into latestweather(city, updatedtime, currentweather, forecast, rawdata) 
-                               values (@city, @updatedtime, @currentweather, @forecast, @rawdata)";
+            string command = @"UPDATE latestweather SET 
+                                    city = @city, 
+                                    updatedtime = @updatedtime, 
+                                    currentweather = @currentweather,
+                                    forecast = @forecast, 
+                                    rawdata = @rawdata
+                               WHERE city=@city";
             
             var result = await _dal.ExecuteQuery<OneCallAPIResponse>(command, new 
             {
                 city = "abc",
                 updatedtime = new DateTime(),
-                currentweather = oneCallApiResponse,
-                forecast = oneCallApiResponse,
+                currentweather = oneCallApiResponse.Current,
+                forecast = oneCallApiResponse.Daily,
                 rawdata = oneCallApiResponse
             });
 
