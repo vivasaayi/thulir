@@ -14,7 +14,7 @@ namespace Thulir.ReactUI.Controllers
     {
         private INewsService _newsService = new NewsService();
 
-        [HttpGet("news")]
+        [HttpGet("list")]
         public async Task<News.Models.News[]> GetNews()
         {
             //await _landsatDataCopier.SyncS3FolderToLocal("/", location);

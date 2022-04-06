@@ -11,7 +11,8 @@ const context = [
     "/api/landsattilegenerator",
     "/landsat-tile",
     "/api/weather",
-    "/api/news"
+    "/api/news",
+    "/api/account"
 ];
 
 module.exports = function (app) {
