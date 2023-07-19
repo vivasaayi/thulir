@@ -12,7 +12,8 @@ const context = [
     "/landsat-tile",
     "/api/weather",
     "/api/news",
-    "/api/account"
+    "/api/account",
+    "/api/fileupload"
 ];
 
 const onError = (err, req, resp, target) => {
