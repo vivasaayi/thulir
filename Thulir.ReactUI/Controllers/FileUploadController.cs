@@ -11,7 +11,7 @@ public class FileUploadController : Controller
     public async Task<IActionResult> Upload(IFormFile file)
     {
         var filePath = Path.GetTempFileName();
-        filePath = "/Users/rajanp/file_uploads/";
+        filePath = "/tmp/thulirdata/";
         
 
         var split = file.FileName.Split("_");
