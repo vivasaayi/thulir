@@ -11,14 +11,15 @@ public class FileUploadController : Controller
     public async Task<IActionResult> Upload(IFormFile file)
     {
         var filePath = Path.GetTempFileName();
-        filePath = "/Users/rajanp/file_uploads/";
+        filePath = AspNetConstants.FILE_UPLOAD_FOLDER_NAME;
         
         // filePath = "/tmp/thulirdata";
 
         var split = file.FileName.Split("_");
-        var label = split[0];
+        var dataSet = split[0];
+        var label = split[1];
 
-        filePath = filePath + label + "/";
+        filePath = filePath + dataSet + "/" + label + "/";
 
         System.IO.Directory.CreateDirectory(filePath);
         

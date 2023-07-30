@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Thulir.Core.Dals;
 using Thulir.Core.Models;
 using Thulir.Core.Utils;
+using Thulir.ReactUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ if (!app.Environment.IsDevelopment())
 {
     // app.UseHttpsRedirection();
 }
+
+AspNetConstants.Init();
 
 app.UseStaticFiles();
 app.UseRouting();
