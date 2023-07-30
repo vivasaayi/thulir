@@ -35,4 +35,29 @@ public class FileUploadController : Controller
     
         return Ok(new { count = 1 });
     }
+    
+    [HttpPost("analyze")]
+    public async Task<IActionResult> Analyze(IFormFile file)
+    {
+        var filePath = AspNetConstants.FILE_UPLOAD_FOLDER_NAME;
+        
+        // filePath = "/tmp/thulirdata";
+
+
+        filePath = filePath + "to-analyze";
+
+        System.IO.Directory.CreateDirectory(filePath);
+        
+        filePath = filePath + "/" + file.FileName;
+        
+        
+        System.Console.WriteLine("Temp file name: ", filePath);
+    
+        using (var stream = System.IO.File.Create(filePath))
+        {
+            await file.CopyToAsync(stream);
+        }
+    
+        return Ok(new { count = 1 });
+    }
 }
