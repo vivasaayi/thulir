@@ -8,11 +8,11 @@ namespace Thulir.Core.Services
 {
     public class ThulirSecrets
     {
-        public async Task<ImageLabellerGlobals> GetThulirGlobals()
+        public async Task<ThulirGlobals> GetThulirGlobals()
         {
             string thulirGlobalsStr = SecretsClient.GetSecret("thulir-globals");
             
-            return JsonSerializer.Deserialize<ImageLabellerGlobals>(thulirGlobalsStr);
+            return JsonSerializer.Deserialize<ThulirGlobals>(thulirGlobalsStr);
         }
     }
 }

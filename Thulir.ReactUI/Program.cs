@@ -56,7 +56,7 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html");
 
 await ConfigLoader.GetInstance().Init();
-ImageLabellerGlobals globals = await ConfigLoader.GetInstance().GetGlobals();
+ThulirGlobals globals = await ConfigLoader.GetInstance().GetGlobals();
 
 PostgresDal.Init(new PostgresConfig(
     globals.PostgresHost,

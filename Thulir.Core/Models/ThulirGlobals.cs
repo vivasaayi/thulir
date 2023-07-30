@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Thulir.Core.Models
 {
-    public class ImageLabellerGlobals
+    public class ThulirGlobals
     {
         [JsonPropertyName("openWeatherAppKey")]
         public string OpenWeatherAppKey { get; set; }
