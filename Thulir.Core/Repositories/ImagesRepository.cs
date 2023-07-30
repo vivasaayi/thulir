@@ -98,10 +98,9 @@ public class ImagesRepository
         return result;
     }
 
-    public async Task<byte[]> GetCachesS3File(string s3Key)
-    {
-        var basePath = "/Users/rajanp/datasets_local/";
-        var localFilePath = basePath + s3Key;
+    public async Task<byte[]> GetCachesS3File(string cacheFolder, string s3Key)
+    {   
+        var localFilePath = cacheFolder + s3Key;
 
         if (File.Exists(localFilePath))
         {

@@ -3,6 +3,7 @@ namespace Thulir.ReactUI;
 public class AspNetConstants
 {
     public static String FILE_UPLOAD_FOLDER_NAME = "";
+    public static String S3_CACHE_FOLDER = "";
 
     public static void Init()
     {
@@ -17,6 +18,18 @@ public class AspNetConstants
             FILE_UPLOAD_FOLDER_NAME = fileUploadFolderName;
         }
         
+        string s3CacheFolder = Environment.GetEnvironmentVariable("S3_CACHE_FOLDER");
+
+        if (string.IsNullOrEmpty(fileUploadFolderName))
+        {
+            S3_CACHE_FOLDER = "/Users/rajanp/datasets_local/";
+        }
+        else
+        {
+            S3_CACHE_FOLDER = s3CacheFolder;
+        }
+        
         Console.Out.WriteLine("FILE_UPLOAD_FOLDER_NAME:" + FILE_UPLOAD_FOLDER_NAME);
+        Console.Out.WriteLine("S3_CACHE_FOLDER:" + S3_CACHE_FOLDER);
     }
 }

@@ -42,8 +42,8 @@ public class ImageController : ControllerBase
     public async Task<FileContentResult> RenderImageFromS3(Guid id)
     {
         var imagedetails = await _imagesRepository.GetImageById(id);
-
-        var image = await _imagesRepository.GetCachesS3File(imagedetails.S3Path);
+        
+        var image = await _imagesRepository.GetCachesS3File(AspNetConstants.S3_CACHE_FOLDER,imagedetails.S3Path);
         
         return File(image, "image/jpeg");
     }
