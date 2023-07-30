@@ -13,7 +13,8 @@ const context = [
     "/api/weather",
     "/api/news",
     "/api/account",
-    "/api/fileupload"
+    "/api/fileupload",
+    "/api/thulirdataset"
 ];
 
 const onError = (err, req, resp, target) => {

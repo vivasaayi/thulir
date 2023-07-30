@@ -34,6 +34,9 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/thulir-dataset-browser">Browse Thulir Dataset</NavLink>
+                </NavItem>
+                <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/browse-landsat-data">Browse Landsat Data</NavLink>
                 </NavItem>
                 <NavItem>

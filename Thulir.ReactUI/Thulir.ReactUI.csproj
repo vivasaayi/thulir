@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Thulir.DataSets\Thulir.DataSets.csproj" />
     <ProjectReference Include="..\Thulir.FarmersLog\Thulir.FarmersLog.csproj" />
     <ProjectReference Include="..\Thulir.Landsat\Thulir.Landsat.csproj" />
     <ProjectReference Include="..\Thulir.News\Thulir.News.csproj" />

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.FarmersLog", "Thulir
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.Weather.Crawler", "Thulir.Weather.Crawler\Thulir.Weather.Crawler.csproj", "{0D87097C-F0DE-4A32-8B5D-0E47C659BE89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thulir.DataSets", "Thulir.DataSets\Thulir.DataSets.csproj", "{7D084BCF-C1B7-49D5-BE14-040935BE6F8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{0D87097C-F0DE-4A32-8B5D-0E47C659BE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D87097C-F0DE-4A32-8B5D-0E47C659BE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D87097C-F0DE-4A32-8B5D-0E47C659BE89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D084BCF-C1B7-49D5-BE14-040935BE6F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D084BCF-C1B7-49D5-BE14-040935BE6F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D084BCF-C1B7-49D5-BE14-040935BE6F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D084BCF-C1B7-49D5-BE14-040935BE6F8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
