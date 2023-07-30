@@ -32,6 +32,7 @@ namespace Thulir.Core.Dals
     {
         private static PostgresDal Instance;
         private static PostgresConfig _postgresConfig;
+        private static IDbConnection Connection; 
         
         private readonly static object _lock = new object();
 
@@ -57,15 +58,34 @@ namespace Thulir.Core.Dals
 
         public static IDbConnection GetConnection()
         {
-            IDbConnection connection = new NpgsqlConnection(_postgresConfig.GetConnectionString());
-            connection.Open();
-            return connection;
+            lock (_lock)
+            {
+                if (Connection == null)
+                {
+                    Connection = new NpgsqlConnection(_postgresConfig.GetConnectionString());
+                    Connection.Open();
+                }
+            }
+
+            return Connection;
+            
         }
 
         public async Task<IEnumerable<T>> ExecuteQuery<T>(string command, Object parameters)
         {
             var result   = await GetConnection().QueryAsync<T>(command, parameters);
             return result;
+        }
+        
+        public async Task<IEnumerable<dynamic>> ExecuteQuery(string command, Object parameters)
+        {
+            var result   = await GetConnection().QueryAsync(command, parameters);
+            return result;
+        }
+        
+        public async Task InsertRecord(string command, Object parameters)
+        {
+            await GetConnection().QueryAsync(command, parameters);
         }
     }
 }

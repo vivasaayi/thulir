@@ -46,7 +46,7 @@ namespace Thulir.Core.Utils
             await GetGlobals();
         }
 
-        public async Task<ThulirGlobals> GetGlobals()
+        public async Task<ImageLabellerGlobals> GetGlobals()
         {
             return await _secrets.GetThulirGlobals();
         } 

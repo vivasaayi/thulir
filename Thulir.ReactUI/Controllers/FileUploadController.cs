@@ -13,8 +13,6 @@ public class FileUploadController : Controller
         var filePath = Path.GetTempFileName();
         filePath = AspNetConstants.FILE_UPLOAD_FOLDER_NAME;
         
-        // filePath = "/tmp/thulirdata";
-
         var split = file.FileName.Split("_");
         var dataSet = split[0];
         var label = split[1];
@@ -24,8 +22,7 @@ public class FileUploadController : Controller
         System.IO.Directory.CreateDirectory(filePath);
         
         filePath = filePath + file.FileName;
-        
-        
+
         System.Console.WriteLine("Temp file name: ", filePath);
     
         using (var stream = System.IO.File.Create(filePath))
@@ -41,9 +38,6 @@ public class FileUploadController : Controller
     {
         var filePath = AspNetConstants.FILE_UPLOAD_FOLDER_NAME;
         
-        // filePath = "/tmp/thulirdata";
-
-
         filePath = filePath + "to-analyze";
 
         System.IO.Directory.CreateDirectory(filePath);

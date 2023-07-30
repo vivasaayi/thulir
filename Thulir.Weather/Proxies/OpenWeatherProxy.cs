@@ -21,7 +21,7 @@ namespace Thulir.Weather.Proxies
 
         private async Task<string> GetAppKey()
         {
-            ThulirGlobals globals = await _secrets.GetThulirGlobals();
+            ImageLabellerGlobals globals = await _secrets.GetThulirGlobals();
             return globals.OpenWeatherAppKey;
         } 
         
