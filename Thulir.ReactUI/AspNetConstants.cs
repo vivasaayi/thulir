@@ -20,7 +20,7 @@ public class AspNetConstants
         
         string s3CacheFolder = Environment.GetEnvironmentVariable("S3_CACHE_FOLDER");
 
-        if (string.IsNullOrEmpty(fileUploadFolderName))
+        if (string.IsNullOrEmpty(s3CacheFolder))
         {
             S3_CACHE_FOLDER = "/Users/rajanp/datasets_local/";
         }
