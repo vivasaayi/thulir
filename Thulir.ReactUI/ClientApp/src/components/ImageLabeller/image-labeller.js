@@ -40,7 +40,7 @@ export default () => {
                         min="0"
                         max="1"
                         step="0.05"
-                        defaultValue="0.4"
+                        defaultValue="0.8"
                         onChange={e => {
                             setBrightness(parseFloat(e.target.value));
                         }}
