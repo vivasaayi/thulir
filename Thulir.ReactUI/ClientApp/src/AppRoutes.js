@@ -5,6 +5,7 @@ import {ThulirDataSetBrowser} from './components/ThulirDataSetBrowser';
 import {LocalizeS3Data} from './components/LocalizeS3Data'
 import {TileGenerator} from './components/TileGenerator'
 import {WeatherViewer} from "./components/WeatherViewer";
+import ImageLabeller from "./components/ImageLabeller/image-labeller";
 
 const AppRoutes = [
   {
@@ -18,6 +19,10 @@ const AppRoutes = [
   {
     path: '/thulir-dataset-browser',
     element: <ThulirDataSetBrowser />
+  },
+  {
+    path: '/image-labeller',
+    element: <ImageLabeller />
   }
 ];
 

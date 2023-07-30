@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Thulir.ReactUI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ImageController : ControllerBase
 {
     private LabelsRepository _labelsRepository = new LabelsRepository();
