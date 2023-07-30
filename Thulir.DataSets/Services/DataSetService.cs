@@ -14,37 +14,28 @@ public class DataSetService
     private void InitializeDataSets()
     {
         DataSets = new Dictionary<string, DataSet>();
+        
+        DataSets.Add("Cotton", getDatSet("Cotton", "Bud,Flower,Stem,Cotton"));
+        DataSets.Add("Tomato", getDatSet("Tomato", "Bud,Flower,Stem,Tomato"));
+        DataSets.Add("Chilli", getDatSet("Chilli", "Green,Red"));
+    }
 
-        List<Label> cottonLabels = new List<Label>();
-        cottonLabels.Add(new Label()
-        {
-            LabelName = "Bud"
-        });
-        
-        cottonLabels.Add(new Label()
-        {
-            LabelName = "Flower"
-        });
-        
-        cottonLabels.Add(new Label()
-        {
-            LabelName = "Stem"
-        });
-        
-        cottonLabels.Add(new Label()
-        {
-            LabelName = "Cotton"
-        });
+    private DataSet getDatSet(String name, String labelsString)
+    {
+        DataSet ds = new DataSet();
+        ds.Name = name;
 
-        DataSet cottonDataSet = new DataSet()
-        {
-            Name = "Cotton",
-            Location = "CottonLocation",
-        };
+        String[] labels = labelsString.Split(",");
 
-        cottonDataSet.Labels = cottonLabels;
+        foreach (var label in labels)
+        {
+            Label lbl = new Label();
+            lbl.LabelName = label;
+            
+            ds.Labels.Add(lbl);
+        }
         
-        DataSets.Add(cottonDataSet.Name, cottonDataSet);
+        return ds;
     }
 
     public List<String> GetAllDataSetNames()
