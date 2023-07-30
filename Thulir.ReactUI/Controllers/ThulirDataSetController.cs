@@ -41,4 +41,19 @@ public class ThulirDataSetController : Controller
         var labels = _dataSetService.GetLabelsForDataSet(dataset);
         return labels;
     }
+    
+    [HttpGet("images")]
+    public async Task<List<String>> GetImages(string? dataset, string? label)
+    {
+        if (String.IsNullOrEmpty(dataset))
+        {
+            return new List<string>();
+        }
+
+        return _dataSetService.GetImagsFor(
+            AspNetConstants.FILE_UPLOAD_FOLDER_NAME,
+            dataset, 
+            label
+        );
+    }
 }

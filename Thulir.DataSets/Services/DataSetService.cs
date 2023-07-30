@@ -1,3 +1,4 @@
+using System.Collections;
 using Thulir.DataSets.Models;
 
 namespace Thulir.DataSets.Services;
@@ -65,5 +66,21 @@ public class DataSetService
         }
 
         return labels;
+    }
+
+    public List<string> GetImagsFor(string folderName, string dataset, string label)
+    {
+        string path = Path.Join(folderName, dataset, label);
+        String[] files = Directory.GetFiles(path);
+
+        List<string> result = new List<string>();
+
+        foreach (var file in files)
+        {
+            string temp = file.Replace(folderName, "");
+            result.Add(temp);
+        }
+        
+        return result;
     }
 }

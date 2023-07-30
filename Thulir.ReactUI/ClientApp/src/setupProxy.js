@@ -10,6 +10,7 @@ const context = [
     "/api/landsatcatalogbuilder",
     "/api/landsattilegenerator",
     "/landsat-tile",
+    "/img",
     "/api/weather",
     "/api/news",
     "/api/account",

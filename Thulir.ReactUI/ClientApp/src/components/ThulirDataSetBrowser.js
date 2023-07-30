@@ -69,15 +69,14 @@ export class ThulirDataSetBrowser extends Component {
     }
 
     handleButtonClick(e) {
-        // debugger;
-        // alert(e.target.innerText)
         this.setState({dataSetName: e.target.innerText} )
         this.renderDataSetDetail(e.target.innerText)
     }
     
     renderDataSetDetail() {
         if(this.state.dataSetName && this.state.dataSetName !== ""){
-            return <DataSetDetails data={this.state.dataSetName}/>;    
+            debugger
+            return <DataSetDetails data={this.state.dataSetName}/>;
         }
     }
     

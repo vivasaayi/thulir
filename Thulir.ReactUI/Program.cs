@@ -43,6 +43,12 @@ if (!app.Environment.IsDevelopment())
     });
 }
 
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(AspNetConstants.FILE_UPLOAD_FOLDER_NAME),
+    RequestPath = new PathString("/img")
+});
+
 app.MapControllerRoute(
     "default",
     "{controller}/{action=Index}/{id?}");
