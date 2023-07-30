@@ -16,7 +16,8 @@ const context = [
     "/api/account",
     "/api/fileupload",
     "/api/thulirdataset",
-    "/api/image"
+    "/api/image",
+    "/api/labels"
 ];
 
 const onError = (err, req, resp, target) => {

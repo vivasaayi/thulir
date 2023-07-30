@@ -95,7 +95,7 @@ export default () => {
 
         setLoading(true);
         return axios
-            .post(`/labels?imageId=${currentImageInfo.imageId}`, regions)
+            .post(`/api/labels?imageId=${currentImageInfo.imageId}`, regions)
             .then(function (response) {
                 console.log("Saved Image", response.data);
                 setLoading(false);

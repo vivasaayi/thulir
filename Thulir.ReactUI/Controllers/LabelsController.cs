@@ -8,7 +8,7 @@ using Label = Thulir.Core.DbModels.Label;
 namespace Thulir.ReactUI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class LabelsController : ControllerBase
 {
     private LabelsRepository _labelsRepository = new LabelsRepository();
