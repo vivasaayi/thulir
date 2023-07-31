@@ -16,9 +16,10 @@ public class DataSetService
     {
         DataSets = new Dictionary<string, DataSet>();
         
-        DataSets.Add("Cotton", getDatSet("Cotton", "Bud,Flower,Stem,Cotton"));
+        DataSets.Add("Cotton", getDatSet("Cotton", "land,crown,leaf,weed,flower,youngleaf,unhealthyleaf,stem,boll,youngboll,bud"));
         DataSets.Add("Tomato", getDatSet("Tomato", "Bud,Flower,Stem,Tomato"));
         DataSets.Add("Chilli", getDatSet("Chilli", "Green,Red"));
+        DataSets.Add("GeneralObjects", getDatSet("GeneralObjects", "pen,crayon,board,desk,chair,cycle,bus,car,bike"));
     }
 
     private DataSet getDatSet(String name, String labelsString)
