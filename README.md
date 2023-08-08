@@ -27,4 +27,6 @@ sudo setcap cap_net_bind_service=+ep ~/ThulirWeb/Thulir.ReactUI
 # Run the exe
 cd ~/ThulirWeb
 ./Thulir.ReactUI
+
+./Thulir.ReactUI &
 ```

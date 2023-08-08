@@ -39,21 +39,21 @@ export class NavMenu extends Component {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/image-labeller">Open Image Labeller</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/browse-landsat-data">Browse Landsat Data</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/catalog-builder">Catalog Builder</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/localize-s3-data">Localize S3 Data</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/generate-tiles">Generate/View Tiles</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/weather">Weather</NavLink>
-                </NavItem>
+                {/*<NavItem>*/}
+                {/*  <NavLink tag={Link} className="text-dark" to="/browse-landsat-data">Browse Landsat Data</NavLink>*/}
+                {/*</NavItem>*/}
+                {/*<NavItem>*/}
+                {/*  <NavLink tag={Link} className="text-dark" to="/catalog-builder">Catalog Builder</NavLink>*/}
+                {/*</NavItem>*/}
+                {/*<NavItem>*/}
+                {/*  <NavLink tag={Link} className="text-dark" to="/localize-s3-data">Localize S3 Data</NavLink>*/}
+                {/*</NavItem>*/}
+                {/*<NavItem>*/}
+                {/*  <NavLink tag={Link} className="text-dark" to="/generate-tiles">Generate/View Tiles</NavLink>*/}
+                {/*</NavItem>*/}
+                {/*<NavItem>*/}
+                {/*  <NavLink tag={Link} className="text-dark" to="/weather">Weather</NavLink>*/}
+                {/*</NavItem>*/}
               </ul>
             </Collapse>
           </Container>
